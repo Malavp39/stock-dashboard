@@ -1,0 +1,64 @@
+<div class="dashboard">
+	<div class="row">
+		<div class="col-xs-6 pull-left">
+			<h2>My Portfolio</h2>
+		</div>
+		<div class="col-xs-6 search-group">
+			<div class="input-group">
+  				<input type="text" 
+  					   class="form-control" 
+  					   ng-model="vm.searchText" 
+  					   placeholder="please enter stock symbol here">
+  				<span class="input-group-addon glyphicon glyphicon-search btn btn-default"
+  					  ng-click="vm.searchSymbol()">
+  				</span>
+			</div>
+		</div>
+		<div class="panel panel-default pull-left">
+			<div class="panel-heading add-profile-header-styles">Stock Profile</div>
+			<table class="table">
+				<tr>
+					<th>Symbol</th>
+					<th>Name</th>
+					<th>Last Trade Price</th>
+					<th>Change</th>
+					<th>Shares Owned</th>
+					<th>Market Value</th>
+					<th></th>
+				</tr>
+				<tr ng-repeat="profile in vm.userProfiles">
+					<td>{{profile.Symbol}}</td>
+					<td>{{profile.Name}}</td>
+					<td>${{profile.LastTradePriceOnly || ' -.--'}}</td>
+					<td>
+						<span ng-class="profile.Change >= 0 ? 'glyphicon glyphicon-arrow-up green': 'glyphicon glyphicon-arrow-down red'"></span>
+						<span>({{profile.Change}})</span>
+					</td>
+					<td>{{profile.sharesOwned || 'N/A'}}</td>
+					<td>{{profile.LastTradePriceOnly * profile.sharesOwned | number: 2}}</td>
+					<td>
+						<div class="btn btn-danger"
+							 ng-click="vm.removeStockFromProfile(profile.Symbol)">
+							remove
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div ng-if="vm.selectedStock">
+			<ul class="list-group pull-right">
+				<li class="list-group-item">{{vm.selectedStock.Name}} ({{vm.selectedStock.Symbol}})</li>
+				<li class="list-group-item">Last Trade Price: ${{vm.selectedStock.LastTradePriceOnly || ' -.--'}}</li>
+				<li class="list-group-item">Number of shares owned:
+					<input type="number" class="form-control adjust-input-share-width" ng-model="vm.sharesOwned"/>
+				</li>
+				<li class="list-group-item">Market value of stake: {{vm.selectedStock.LastTradePriceOnly * vm.sharesOwned | number: 2}}</li>
+				<li class="list-group-item">
+					<div class="btn btn-success full-width"
+						 ng-click="vm.addStockToProfile()"
+						 ng-disabled="vm.userStockDetails.length >= 5">Add {{vm.selectedStock.Symbol}} to Portfolio</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

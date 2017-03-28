@@ -1,0 +1,33 @@
+.dashboard {
+	margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1200px;
+}
+
+.dashboard .search-group {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.dashboard .full-width {
+	width: 100%;
+}
+
+.dashboard .green {
+	color: green;
+}
+
+.dashboard .red {
+	color: red;
+}
+
+.dashboard .adjust-input-share-width {
+	display: inline;
+	max-width: 80px;
+}
+
+.dashboard .add-profile-header-styles {
+	font-size: 18px;
+	font-weight: 400;
+}

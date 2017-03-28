@@ -1,14 +1,20 @@
-'use strict';
+(function(angular) {
+	'use strict';
 
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+	angular.module('stk', [
+		'ui.router',
+		'stk.dashboard'
+	]).config(config);
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+	function config($stateProvider, $urlRouterProvider) {
+		$urlRouterProvider.otherwise('/dashboard');
+
+		$stateProvider
+			.state('stk', {
+	            url: '/dashboard',
+	            templateUrl: 'dashboard/dashboard.html',
+	            controller: 'DashboardController',
+	            controllerAs: 'vm'
+	        });
+	}
+})(angular);
